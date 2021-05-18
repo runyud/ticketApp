@@ -11,4 +11,8 @@ public interface TicketDAO {
 	public void saveTicket(Ticket ticket);
 
 	public Ticket getTicket(int id);
+
+	public void deleteTicket(int id);
+
+	public List<Ticket> searchTickets(String searchEvent);
 }

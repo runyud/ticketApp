@@ -34,4 +34,16 @@ public class TicketServiceImpl implements TicketService {
 		return ticketDAO.getTicket(id);
 	}
 
+	@Override
+	@Transactional
+	public void deleteTicket(int id) {
+		ticketDAO.deleteTicket(id);
+	}
+
+	@Override
+	@Transactional
+	public List<Ticket> searchTickets(String searchEvent) {
+		return ticketDAO.searchTickets(searchEvent);
+	}
+
 }

@@ -73,7 +73,14 @@
 						<td><label>Event Id: </label></td>
 						<td><form:input path="eventId" /></td>
 					</tr>
-					
+					<tr>
+						<td><label>Event Name: </label></td>
+						<td><form:input path="eventName" /></td>
+					</tr>
+					<tr>
+						<td><label>Event Date: </label></td>
+						<td><form:input path="eventDate" /></td>
+					</tr>
 					<tr>
 						<td><label></label></td>
 						<td><input type="submit" value="Save" class="save"/></td>

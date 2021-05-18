@@ -17,11 +17,11 @@ import com.ticket.service.TicketService;
 @Controller
 @RequestMapping("/tickets")
 public class TicketController {
-	
+
 	// inject ticket service
 	@Autowired
 	private TicketService ticketService;
-	
+
 	@GetMapping("/list")
 	public String listTickets(Model model) {
 		// get tickets from dao and add them to the model
@@ -29,7 +29,7 @@ public class TicketController {
 		model.addAttribute("tickets", tickets);
 		return "list-tickets";
 	}
-	
+
 	@GetMapping("/formAddTicket")
 	public String formAddTicket(Model model) {
 		// use model attribute to bind form data
@@ -37,22 +37,42 @@ public class TicketController {
 		model.addAttribute("ticket", ticket);
 		return "ticket-form";
 	}
-	
+
 	@PostMapping("/saveTicket")
 	public String saveTicket(@ModelAttribute("ticket") Ticket ticket) {
-		
+
 		// save the ticket through the service
 		ticketService.saveTicket(ticket);
-		
+
 		return "redirect:/tickets/list";
 	}
-	
+
 	@GetMapping("/formUpdateTicket")
-	public String formUpdateTicket(@RequestParam("ticketId") int id,
-								   Model model) {
+	public String formUpdateTicket(@RequestParam("ticketId") int id, Model model) {
 		// get ticket as model attribute to populate the form
 		Ticket ticket = ticketService.getTicket(id);
 		model.addAttribute("ticket", ticket);
 		return "ticket-form";
 	}
+
+	@GetMapping("/delete")
+	public String deleteTicket(@RequestParam("ticketId") int id) {
+
+		// delete the ticket
+		ticketService.deleteTicket(id);
+
+		return "redirect:/tickets/list";
+	}
+
+	@GetMapping("/search")
+	public String searchTickets(@RequestParam("searchEvent") String searchEvent, Model model) {
+		// search tickets from the service
+		List<Ticket> tickets = ticketService.searchTickets(searchEvent);
+		if(tickets == null || tickets.size() == 0) {
+			return "no-results";
+		}
+		model.addAttribute("tickets", tickets);
+		return "list-tickets";
+	}
+
 }

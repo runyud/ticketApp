@@ -23,7 +23,6 @@ public class TicketDAOImpl implements TicketDAO {
 		// create the query to get the tickets
 		Query<Ticket> query = session.createQuery("from Ticket order by ticketId", Ticket.class);
 		List<Ticket> tickets = query.getResultList();
-
 		return tickets;
 	}
 
@@ -38,6 +37,30 @@ public class TicketDAOImpl implements TicketDAO {
 	public Ticket getTicket(int id) {
 		Session session = sessionFactory.getCurrentSession();
 		return session.get(Ticket.class, id);
+	}
+
+	@Override
+	public void deleteTicket(int id) {
+		Session session = sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
+		Query<Ticket> query = session.createQuery("delete from Ticket where ticketId=:id");
+		query.setParameter("id", id);
+		query.executeUpdate();
+	}
+
+	@Override
+	public List<Ticket> searchTickets(String searchEvent) {
+		Session session = sessionFactory.getCurrentSession();
+		Query<Ticket> query = null;
+		if(searchEvent != null && searchEvent.trim().length() > 0) {
+			query = session.createQuery("from Ticket where lower(eventName) like :searchEvent", Ticket.class);
+			query.setParameter("searchEvent", "%" + searchEvent.toLowerCase() + "%");
+		} else {
+			// search event is empty so get all tickets
+			query = session.createQuery("from Ticket", Ticket.class);
+		}
+		
+		return query.getResultList();
 	}
 
 }

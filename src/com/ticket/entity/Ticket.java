@@ -48,6 +48,12 @@ public class Ticket {
 	
 	@Column(name="event_id")
 	private int eventId;
+	
+	@Column(name="event_name")
+	private String eventName;
+	
+	@Column(name="event_date")
+	private String eventDate;
 
 	public Ticket() {}
 	
@@ -147,11 +153,28 @@ public class Ticket {
 		this.eventId = eventId;
 	}
 
+	public String getEventName() {
+		return eventName;
+	}
+
+	public void setEventName(String eventName) {
+		this.eventName = eventName;
+	}
+
+	public String getEventDate() {
+		return eventDate;
+	}
+
+	public void setEventDate(String eventDate) {
+		this.eventDate = eventDate;
+	}
+
 	@Override
 	public String toString() {
 		return "Ticket [ticketId=" + ticketId + ", firstName=" + firstName + ", lastName=" + lastName + ", email="
 				+ email + ", seatNumber=" + seatNumber + ", row=" + row + ", level=" + level + ", address=" + address
-				+ ", venueName=" + venueName + ", barcode=" + barcode + ", status=" + status + ", eventId="
-				+ eventId + "]";
+				+ ", venueName=" + venueName + ", barcode=" + barcode + ", status=" + status + ", eventId=" + eventId
+				+ ", eventName=" + eventName + ", eventDate=" + eventDate + "]";
 	}
+
 }
