@@ -7,7 +7,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.ticket.entity.Ticket;
 
@@ -17,18 +16,28 @@ public class TicketDAOImpl implements TicketDAO {
 	// Injecting the session factory
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	@Override
-	@Transactional
 	public List<Ticket> getTickets() {
-		
 		Session session = sessionFactory.getCurrentSession();
-		
 		// create the query to get the tickets
-		Query<Ticket> query = session.createQuery("from Ticket", Ticket.class);
+		Query<Ticket> query = session.createQuery("from Ticket order by ticketId", Ticket.class);
 		List<Ticket> tickets = query.getResultList();
-		
+
 		return tickets;
+	}
+
+	@Override
+	public void saveTicket(Ticket ticket) {
+		Session session = sessionFactory.getCurrentSession();
+		// save or update the ticket
+		session.saveOrUpdate(ticket);
+	}
+
+	@Override
+	public Ticket getTicket(int id) {
+		Session session = sessionFactory.getCurrentSession();
+		return session.get(Ticket.class, id);
 	}
 
 }

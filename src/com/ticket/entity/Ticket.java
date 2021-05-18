@@ -28,10 +28,10 @@ public class Ticket {
 	@Column(name="seat_number")
 	private int seatNumber;
 	
-	@Column(name="row")
+	@Column(name="row_num")
 	private int row;
 	
-	@Column(name="level")
+	@Column(name="level_num")
 	private int level;
 	
 	@Column(name="address")
@@ -43,7 +43,7 @@ public class Ticket {
 	@Column(name="barcode")
 	private int barcode;
 	
-	@Column(name="status")
+	@Column(name="status_active")
 	private String status;
 	
 	@Column(name="event_id")

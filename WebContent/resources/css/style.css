@@ -33,8 +33,8 @@ tr:nth-child(odd) {background: #BBBBBB}
 #container h3 {color: #000;}
 #container #content {margin-top: 20px;}
 
-.add-button {
-	border: 1px solid #666; 
+.insert-button {
+	border: 1px solid #006600; 
 	border-radius: 5px; 
 	padding: 4px; 
 	font-size: 12px;
